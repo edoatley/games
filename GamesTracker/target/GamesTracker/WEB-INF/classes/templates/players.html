@@ -1,0 +1,92 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Game Management</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	    <!-- Latest compiled and minified JavaScript -->
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+     integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+
+    <header class="bs-docs-nav navbar navbar-static-top" id=top>
+	  <div class=container>
+		<div class=navbar-header>
+		  <button aria-controls=bs-navbar aria-expanded=false class="collapsed navbar-toggle" data-target=#bs-navbar data-toggle=collapse type=button>
+			<span class=sr-only>Toggle navigation</span>
+			<span class=icon-bar></span>
+			<span class=icon-bar></span>
+			<span class=icon-bar></span>
+		  </button>
+		</div>
+		<nav class="collapse navbar-collapse" id=bs-navbar>
+		  <ul class="nav navbar-nav">
+			<li> <a href="welcome.html" th:href="@{/}">Welcome</a> </li>
+			<li class=active> <a href="players.html" th:href="@{/}">Players</a> </li>
+			<li> <a href="games.html" th:href="@{/}">Games</a> </li>
+			<li> <a href="plays.html" th:href="@{/}">Plays</a> </li>
+		  </ul>
+		  <ul class="nav navbar-nav navbar-right">
+			<li><a href="logs.html" th:href="@{/}">Logging</a></li>
+		  </ul>
+		</nav>
+	  </div>
+    </header>
+
+	<div class="container bs-docs-container">
+	  <div class="row">
+	    <div class="col-md-9" role="main">
+	      <div class="bs-docs-section">
+			<h1 class="mainTitle">Players</h1>
+
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+				  <thead>
+					  <tr>
+						<th>Name</th>
+						<th>Age</th>
+						<th>Current Score</th>
+					  </tr>
+				  </thead>
+				  <tr th:each="player : ${players}">
+					<td th:text="${player.name}">Edd</td>
+					<td th:text="${player.age}">36</td>
+					<td th:text="${player.score}">100000</td>
+				  </tr>
+				</table>
+			</div>
+
+			<div id="addNewDiv" class="container">
+				<p th:text="#{add.player}">Enter details here to add a new player: </p>
+				<form class="form-horizontal" action="players.html" th:attr="action=@{/players}">
+				  <fieldset>
+					<div class="form-group">
+					  <label class="col-sm-2 control-label"for="name" th:text="#{player.name}">Name: </label>
+					  <input type="text" th:field="*{name}" />
+					</div>
+					<div class="form-group">
+					  <label  class="col-sm-2 control-label" for="age" th:text="#{player.dateOfBirth}">Date of Birth: </label>
+  	  				  <input type="text" th:field="*{dateOfBirth}" />
+					</div>
+					<div class="form-group">
+					  <div class="col-sm-offset-2 col-sm-10">
+					    <button class="btn btn-default" type="submit" name="save" th:text="#{player.add}">Add Player</button>
+					  </div>
+					</div>
+				  </fieldset>
+				</form>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </body>
+
+</html>

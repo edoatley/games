@@ -1,0 +1,7 @@
+com\edoatley\model\Game.class
+com\edoatley\controller\PlayerController.class
+com\edoatley\controller\HelloController.class
+com\edoatley\model\Player.class
+com\edoatley\controller\GameController.class
+com\edoatley\GamesTracker.class
+com\edoatley\model\Play.class
