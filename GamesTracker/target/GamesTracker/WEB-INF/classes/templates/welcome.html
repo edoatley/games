@@ -1,38 +1,37 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
   <head>
     <title>Oatley Games Night Scoring System</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-     integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous" />
   </head>
 
   <body>
 
-    <header class="bs-docs-nav navbar navbar-static-top" id=top>
-	  <div class=container>
-		<div class=navbar-header>
-		  <button aria-controls=bs-navbar aria-expanded=false class="collapsed navbar-toggle" data-target=#bs-navbar data-toggle=collapse type=button>
-			<span class=sr-only>Toggle navigation</span>
-			<span class=icon-bar></span>
-			<span class=icon-bar></span>
-			<span class=icon-bar></span>
+    <header id="top" class="bs-docs-nav navbar navbar-static-top">
+	  <div class="container">
+		<div class="navbar-header">
+		  <button aria-controls="bs-navbar" aria-expanded="false" class="collapsed navbar-toggle" data-target="#bs-navbar" data-toggle="collapse" type="button">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
 		  </button>
 		</div>
-		<nav class="collapse navbar-collapse" id=bs-navbar>
+		<nav id="bs-navbar" class="collapse navbar-collapse">
 		  <ul class="nav navbar-nav">
-			<li> <a href="welcome.html" th:href="@{/}">Welcome</a> </li>
-			<li class=active> <a href="players.html" th:href="@{/}">Players</a> </li>
-			<li> <a href="games.html" th:href="@{/}">Games</a> </li>
-			<li> <a href="plays.html" th:href="@{/}">Plays</a> </li>
+			<li class="active"> <a href="welcome.html" th:href="@{/welcome.html}">Welcome</a> </li>
+			<li> <a href="players.html" th:href="@{/players.html}">Players</a> </li>
+			<li> <a href="games.html" th:href="@{/games.html}">Games</a> </li>
+			<li> <a href="nights.html" th:href="@{/nights.html}">Nights</a> </li>
 		  </ul>
 		  <ul class="nav navbar-nav navbar-right">
 			<li><a href="logs.html" th:href="@{/}">Logging</a></li>
