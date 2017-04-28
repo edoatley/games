@@ -1,23 +1,46 @@
 package com.edoatley.model;
 
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class GamePlay {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "GAMEPLAY_ID")
 	private int id;
+	
+	@OneToOne(optional=false)
+	@JoinColumn(name="GAME_ID")
 	private Game game;
-	private List<Player> players;
+	
+	@ManyToMany
+	@JoinTable
+	(
+	      name="GP_PLAY",
+	      joinColumns=@JoinColumn(name="GAMEPLAY_ID", referencedColumnName="GAMEPLAY_ID"),
+	      inverseJoinColumns=@JoinColumn(name="PLAYER_ID", referencedColumnName="ID")
+	)
+	private Set<Player> players;
+	
+	@ManyToOne
+	@JoinColumn(name="WIN_PLAY_ID")
 	private Player winner;
 	
-	public GamePlay(Game game, List<Player> players, Player winner) {
+	protected GamePlay() {}
+	
+	public GamePlay(Game game, Set<Player> players, Player winner) {
 		super();
 		this.game = game;
 		this.players = players;
@@ -40,11 +63,11 @@ public class GamePlay {
 		this.game = game;
 	}
 
-	public List<Player> getPlayers() {
+	public Set<Player> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(List<Player> players) {
+	public void setPlayers(Set<Player> players) {
 		this.players = players;
 	}
 

@@ -5,21 +5,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.edoatley.util.CustomDifficultySerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 public class Game {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+
 	private String name;
-	private int minutes;
-	private int pointsForWin;
+	private int minutesToPlay;
+	private int timesPlayed;
 	
-	public Game(String name, int minutes, int pointsForWin) {
+	@JsonSerialize(using=CustomDifficultySerializer.class)
+	private Difficulty difficulty;
+	
+	protected Game() {}
+	
+	public Game(String name, int minutesToPlay, Difficulty difficulty, int timesPlayed) {
 		super();
 		this.name = name;
-		this.minutes = minutes;
-		this.pointsForWin = pointsForWin;
+		this.minutesToPlay = minutesToPlay;
+		this.difficulty = difficulty;
+		this.timesPlayed = timesPlayed;
 	}
 
 	public int getId() {
@@ -38,19 +48,28 @@ public class Game {
 		this.name = name;
 	}
 
-	public int getMinutes() {
-		return minutes;
+	public Difficulty getDifficulty() {
+		return difficulty;
 	}
 
-	public void setMinutes(int minutes) {
-		this.minutes = minutes;
+	public void setDifficulty(Difficulty difficulty) {
+		this.difficulty = difficulty;
+	}
+
+	public int getTimesPlayed() {
+		return timesPlayed;
+	}
+
+	public void setTimesPlayed(int timesPlayed) {
+		this.timesPlayed = timesPlayed;
+	}
+
+	public int getMinutesToPlay() {
+		return minutesToPlay;
+	}
+
+	public void setMinutesToPlay(int minutesToPlay) {
+		this.minutesToPlay = minutesToPlay;
 	}
 	
-	public int getPointsForWin() {
-		return pointsForWin;
-	}
-	
-	public void setPointsForWin(int pointsForWin) {
-		this.pointsForWin = pointsForWin;
-	}
 }
