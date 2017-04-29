@@ -50,34 +50,37 @@
 			<div class="table-responsive">
 				<table class="table table-bordered table-striped">
 				  <tr>
-					<th>Name</th>
-					<th>Difficulty</th>
-					<th>Approximate Time (min)</th>
-					<th>Number of Plays</th>
+					<th>Games Night Description</th>
+					<th>Date</th>
+					<th>Night Finished?</th>
+					<th>Number of Games Played</th>
 				  </tr>
 				  <tr th:each="night : ${nights}">
-					<td th:text="${night.date}">28/04/2017</td>
 					<td th:text="${night.description}">Oatley Family Games Night</td>
-					<td th:text="${night.isFinished .minutesToPlay}">30</td>
-					<td th:text="${game.timesPlayed}">18</td>
+					<td th:text="${night.date}">28/04/2017</td>
+					<td th:text="${night.isFinished}">Yes</td>
+					<td th:text="${night.numberOfGamesPlayed}">3</td>
 				  </tr>
 				</table>
 			</div>
 
 			<div id="addNewDiv">
 				<p th:text="#{add.night}">Enter details here to add a new game night</p>
-				<form class="form-horizontal" action="nights.html" th:attr="action=@{/nights}">
+				<form class="form-horizontal" method="post" action="nights.html" th:attr="action=@{/nights}" th:object="${night}">
 				  <fieldset>
 					<div class="form-group">
-					  <label class="col-sm-2 control-label" for="description" th:text="#{night.description}">Description: </label>
+					  <label class="col-sm-4 control-label" for="description" th:text="#{night.description}">Description: </label>
 					  <input type="text" th:field="*{description}" />
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label" for="date" th:text="#{night.date}">Date: </label>
+					  <label class="col-sm-4 control-label" for="date" th:text="#{night.date}">Date: </label>
 					  <input type="text" th:field="*{date}" />
 					</div>
-					<div class="col-sm-offset-2 col-sm-10">
-					    <button class="btn btn-default" type="submit" name="save" th:text="#{night.add}">Add Night</button>
+					<div class="hidden">
+					  <input type="checkbox" th:field="*{finished}" />
+					</div>
+					<div class="col-sm-offset-4 col-sm-10">
+					    <button class="btn btn-default" type="submit" name="save" th:text="#{new.night.add}">Add Night</button>
 					</div>
 				  </fieldset>
 				</form>

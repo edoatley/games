@@ -5,16 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.edoatley.controller.PlayersController;
 import com.edoatley.model.Player;
 import com.edoatley.repository.PlayersRepository;
 
 @Service
 public class PlayersService {
 
+	private static final Logger log = LoggerFactory.getLogger(PlayersService.class);
+	
 	@Autowired
 	private PlayersRepository repository;
 	
@@ -26,6 +31,8 @@ public class PlayersService {
 	}
 	
 	public void save(Player newPlayer) {
+		log.info("save() -> " + newPlayer);
+		
 		if(isValidPlayer(newPlayer)) {
 			repository.save(newPlayer);
 		}
@@ -36,6 +43,8 @@ public class PlayersService {
 	
 	
 	private boolean isValidPlayer(Player newPlayer) {
+		log.info("isValidPlayer() -> " + newPlayer);
+		
 		boolean isValidPlayer = true;
 		
 		if(newPlayer == null) {

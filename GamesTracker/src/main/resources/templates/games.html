@@ -57,7 +57,7 @@
 				  </tr>
 				  <tr th:each="game : ${games}">
 					<td th:text="${game.name}">Ticket To Ride Junior</td>
-					<td th:text="${game.difficulty.description}">Easy</td>
+					<td th:text="${game.difficulty}">Easy</td>
 					<td th:text="${game.minutesToPlay}">30</td>
 					<td th:text="${game.timesPlayed}">18</td>
 				  </tr>
@@ -66,7 +66,7 @@
 
 			<div id="addNewDiv">
 				<p th:text="#{add.game}">Enter details here to add a new game</p>
-				<form class="form-horizontal" action="games.html" th:attr="action=@{/games}">
+				<form class="form-horizontal" action="games.html" method="post" th:attr="action=@{/games}" th:object="${game}">
 				  <fieldset>
 					<div class="form-group">
 					  <label  class="col-sm-3 control-label" for="name" th:text="#{game.name}">Name: </label>
@@ -74,16 +74,16 @@
 					</div>
 					<div class="form-group">
 						<label  class="col-sm-3 control-label" for="name" th:text="#{game.difficulty}">Difficulty: </label>
-						<select th:field="${game.difficulty}">
-							<option th:each="difficulty : ${difficulties}" th:value="${difficulty.id}" th:text="${difficulty.name}">Easy</option>
+						<select th:field="*{difficulty}">
+							<option th:each="diff : ${T(com.edoatley.model.Difficulty).values()}" th:value="${diff}" th:text="${diff.description}">Easy</option>
 						</select>
 					</div>
 					<div class="form-group">
-					  <label class="col-sm-3 control-label" for="length" th:text="#{game.length}">Length (Minutes): </label>
-					  <input type="text" th:field="*{length}" />
+					  <label class="col-sm-3 control-label" for="length" th:text="#{game.minutesToPlay}">Length (Minutes): </label>
+					  <input type="text" th:field="*{minutesToPlay}" />
 					</div>
 					<div class="col-sm-offset-2 col-sm-10">
-					  <button class="btn btn-default" type="submit" name="save" th:text="#{game.add}">Add Game</button>
+					  <button class="btn btn-default" type="submit" name="save" th:text="#{new.game.add}">Add Game</button>
 					</div>
 				  </fieldset>
 				</form>

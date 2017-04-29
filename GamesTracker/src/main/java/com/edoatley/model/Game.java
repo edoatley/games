@@ -5,9 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.edoatley.util.CustomDifficultySerializer;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 @Entity
 public class Game {
 
@@ -18,11 +15,9 @@ public class Game {
 	private String name;
 	private int minutesToPlay;
 	private int timesPlayed;
-	
-	@JsonSerialize(using=CustomDifficultySerializer.class)
 	private Difficulty difficulty;
 	
-	protected Game() {}
+	public Game() {} // easier with thymeleaf
 	
 	public Game(String name, int minutesToPlay, Difficulty difficulty, int timesPlayed) {
 		super();
@@ -71,5 +66,13 @@ public class Game {
 	public void setMinutesToPlay(int minutesToPlay) {
 		this.minutesToPlay = minutesToPlay;
 	}
+
+	@Override
+	public String toString() {
+		return "Game [id=" + id + ", name=" + name + ", minutesToPlay=" + minutesToPlay + ", timesPlayed=" + timesPlayed
+				+ ", difficulty=" + difficulty + "]";
+	}
+	
+	
 	
 }

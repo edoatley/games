@@ -12,11 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import com.edoatley.util.CustomBooleanSerializer;
-import com.edoatley.util.CustomLocalDateSerializer;
-import com.edoatley.util.JsonDateFormat;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Night {
@@ -26,21 +22,19 @@ public class Night {
 	@Column(name = "NIGHT_ID")
 	private int id;
 	
-	private String description;
-	
-	@JsonFormat(pattern="dd/MM/yyyy")
-	@JsonDateFormat("dd/MM/yyyy")
-	@JsonSerialize(using=CustomLocalDateSerializer.class)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate date;
-	
-	@JsonSerialize(using=CustomBooleanSerializer.class)
-	private Boolean finished;
+
+	private String description;
+	private boolean finished;
 		
 	@OneToMany
 	@JoinColumn(name="GAMEPLAY_ID")
 	private List<GamePlay> gamesPlayed;
 	
-	protected Night() {}
+	public Night() {
+		gamesPlayed = new ArrayList<GamePlay>();
+	}
 
 	public Night(int id, String description, LocalDate date, boolean finished, List<GamePlay> gamesPlayed) {
 		super();
@@ -105,6 +99,10 @@ public class Night {
 	}
 	public void setIsFinished(String isFinished) {
 		finished = "Yes".equals(isFinished); 
+	}
+	
+	public int getNumberOfGamesPlayed() {
+		return gamesPlayed.size();
 	}
 	
 	

@@ -25,7 +25,6 @@ public class PlayersController {
 	
     @RequestMapping(value="/players", method=RequestMethod.GET)
     public String fetchPlayers(Model model) {
-    	log.error("PlayerRepository " + playersService);
     	
     	List<Player> players = playersService.findAllPlayers(); 
     	
@@ -38,7 +37,9 @@ public class PlayersController {
 	@RequestMapping(value="/players", method=RequestMethod.POST)
 	public String addPlayer(@ModelAttribute("player") Player newPlayer, BindingResult result, Model model) {
 
-		System.out.println("Player " + newPlayer.getName());
+		log.info("Adding Player " + newPlayer.getName());
+		log.info("Adding Player (full details) " + newPlayer.toString());
+		
 		List<Player> players = playersService.findAllPlayers(); 
 		
 		try {			

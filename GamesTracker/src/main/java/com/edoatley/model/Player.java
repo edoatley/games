@@ -8,10 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.edoatley.util.CustomLocalDateSerializer;
-import com.edoatley.util.JsonDateFormat;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Player {
@@ -24,9 +21,7 @@ public class Player {
 	private int currentScore;
 	private int age;
 	
-	@JsonFormat(pattern="dd/MM/yyyy")
-	@JsonDateFormat("dd/MM/yyyy")
-	@JsonSerialize(using=CustomLocalDateSerializer.class)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dateOfBirth;
 	
 	public Player() {}
