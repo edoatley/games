@@ -1,14 +1,20 @@
 package com.edoatley.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.edoatley.service.GamesService;
+
 @Controller
 @SessionAttributes("game")
-public class GameController {
+public class GamesController {
 
+	@Autowired
+	private GamesService gamesService;
+	
     @RequestMapping("/games")
     public String games(Model model) {
         return "games";
