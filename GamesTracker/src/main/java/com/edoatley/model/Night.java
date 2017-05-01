@@ -30,7 +30,6 @@ public class Night {
 	private boolean finished;
 		
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="GAMEPLAY_ID")
 	private List<GamePlay> gamesPlayed;
 	
 	public Night() {

@@ -31,17 +31,17 @@ public class GamesTracker {
 		return (args) -> {
 			
 			log.info("Adding Games...");
-			games.save(new Game("Ticket to Ride", 25, Difficulty.EASY, 5));
-			games.save(new Game("My First Stone Age", 30, Difficulty.MEDIUM, 5));
+			//games.save(new Game("Ticket to Ride", 25, Difficulty.EASY, 5));
+			//games.save(new Game("My First Stone Age", 30, Difficulty.MEDIUM, 5));
 			log.info("");
 
 			log.info("Adding Players...");
-			players.save(new Player("Edd", LocalDate.of(1981, 1, 1), 888));
-			players.save(new Player("Hannah", LocalDate.of(1980, 1, 1), 888));
+			//players.save(new Player("Edd", LocalDate.of(1981, 1, 1), 888));
+			//players.save(new Player("Hannah", LocalDate.of(1980, 1, 1), 888));
 			log.info("");
 			
 			log.info("Adding Nights...");
-			nights.save(new Night("May Inaugural", LocalDate.of(2017, 5, 1)));
+			//nights.save(new Night("May Inaugural", LocalDate.of(2017, 5, 1)));
 			log.info("");
 			
 		};
