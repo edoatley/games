@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.edoatley.model.Night;
 
 @Repository
-public interface NightsRepository extends CrudRepository<Night, Long> {
+public interface NightsRepository extends CrudRepository<Night, Integer> {
 
 }

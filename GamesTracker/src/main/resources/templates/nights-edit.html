@@ -58,48 +58,60 @@
 					<th>Night Finished?</th>
 					<th>Number of Games Played</th>
 				  </tr>
-				  <tr th:each="night : ${nights}">
-					<td><a th:text="${night.description}" th:href="@{'/nights/details/' + ${night.id}}">Oatley Family Games Night</a></td>
-					<td th:text="${night.date}">28/04/2017</td>
-					<td th:text="${night.isFinished}">Yes</td>
-					<td th:text="${night.numberOfGamesPlayed}">3</td>
+				  <tr>
+					<td th:text="${gamesnight.description}">Oatley Family Games Night</td>
+					<td th:text="${gamesnight.date}">28/04/2017</td>
+					<td th:text="${gamesnight.isFinished}">Yes</td>
+					<td th:text="${gamesnight.numberOfGamesPlayed}">3</td>
+				  </tr>
+				</table>
+			</div>
+			
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+				  <tr>
+					<th>Name</th>
+					<th>Players</th>
+					<th>Winner</th>
+				  </tr>
+				  <tr th:each="gp : ${gamesnight.gamesPlayed}">
+					<td th:text="${gp.game.name}">Ticket To Ride Junior</td>
+					<td><p th:each="plyr : ${gp.players}" th:text="${plyr.name}">Leo</p></td>
+					<td th:text="${gp.winner.name}">Leo</td>
 				  </tr>
 				</table>
 			</div>
 			
 
 			<div id="addNewDiv">
-				<p th:text="#{add.night}">Enter details here to add a new game night</p>
-				<form class="form-horizontal" method="post" action="nights.html" th:attr="action=@{/nights}" th:object="${night}">
+				<p th:text="#{add.gameplay}">Enter details here to add a new game night</p>
+				<form class="form-horizontal" method="post" action="nights/gameplay/add.html" th:attr="action=@{'/nights/' + ${gamesnight.id} + '/gameplay'}" th:object="${gameplay}">
 				  <fieldset>
 					<div class="form-group">
-					  <label class="col-sm-4 control-label" for="description" th:text="#{night.description}">Description: </label>
-					  <input type="text" th:field="*{description}" />
+						<label class="col-sm-3 control-label" for="name" th:text="#{game.name}">Name of Game: </label>
+						<select class="col-sm-4" th:field="*{game}">
+							<option th:each="g : ${gameslist}" th:value="${g.id}" th:text="${g.name}">Ticket To Ride Junior</option>
+						</select>
 					</div>
 					<div class="form-group">
-					  <label class="col-sm-4 control-label" for="date" th:text="#{night.date}">Date: </label>
-					  <div class="input-group date col-sm-4" id="datetimepicker1">
-						  <input class="form-control" type="text" th:field="*{date}" />
-						    <span class="input-group-addon">
-		                        <span class="glyphicon glyphicon-calendar"></span>
-		                    </span>
-		              </div>      
+						<label class="col-sm-3 control-label" th:text="#{game.player.names}">People playing game:</label>
+						<ul>
+						  <li class="" th:each="player : ${playerslist}">
+						    <input type="checkbox" th:field="*{players}" th:value="${player.id}" th:text="${player.name}" />
+						  </li>
+						</ul>
 					</div>
-					<div class="hidden">
-					  <input type="checkbox" th:field="*{finished}" />
+					<div class="form-group">
+						<label class="col-sm-3 control-label" for="name" th:text="#{winner.name}">Name of Game: </label>
+						<select class="col-sm-4" th:field="*{winner}">
+							<option th:each="player : ${playerslist}" th:value="${player.id}" th:text="${player.name}">Edd</option>
+						</select>
 					</div>
 					<div class="col-sm-offset-4 col-sm-10">
-					    <button class="btn btn-default" type="submit" name="save" th:text="#{new.night.add}">Add Night</button>
+					    <button class="btn btn-default" type="submit" name="save" th:text="#{new.gameplay.add}">Add Game Play</button>
 					</div>
 				  </fieldset>
 				</form>
-				<script type="text/javascript">
-		            $(function () {
-		                $('#datetimepicker1').datetimepicker({
-		                	format: 'DD/MM/YYYY'
-		                });
-		            });
-		        </script>
 			</div>
 		  </div>
 		</div>

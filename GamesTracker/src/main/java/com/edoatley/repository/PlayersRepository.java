@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.edoatley.model.Player;
 
 @Repository
-public interface PlayersRepository extends CrudRepository<Player, Long> {
+public interface PlayersRepository extends CrudRepository<Player, Integer> {
 
 }

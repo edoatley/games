@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.edoatley.controller.PlayersController;
 import com.edoatley.model.Player;
 import com.edoatley.repository.PlayersRepository;
 
@@ -71,7 +70,17 @@ public class PlayersService {
 		return isValidPlayer;
 	}
 
-
-
+	public Optional<Player> getPlayer(int playerId) {
+		Player player = repository.findOne(playerId);
+		return Optional.ofNullable(player);
+	}
 	
+	public void updateScore(int playerId, int scoreToAdd) {
+		Optional<Player> playerO = getPlayer(playerId);
+		Player player = playerO.get();
+		int score = player.getCurrentScore();
+		score += scoreToAdd;
+		player.setCurrentScore(score);
+		repository.save(player);
+	}
 }

@@ -2,6 +2,7 @@ package com.edoatley.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,11 +22,11 @@ public class GamePlay {
 	@Column(name = "GAMEPLAY_ID")
 	private int id;
 	
-	@OneToOne(optional=false)
+	@OneToOne(optional=false, cascade=CascadeType.ALL)
 	@JoinColumn(name="GAME_ID")
 	private Game game;
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable
 	(
 	      name="GP_PLAY",
@@ -34,11 +35,11 @@ public class GamePlay {
 	)
 	private Set<Player> players;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="WIN_PLAY_ID")
 	private Player winner;
 	
-	protected GamePlay() {}
+	public GamePlay() {}
 	
 	public GamePlay(Game game, Set<Player> players, Player winner) {
 		super();
@@ -78,5 +79,12 @@ public class GamePlay {
 	public void setWinner(Player winner) {
 		this.winner = winner;
 	}
+
+	@Override
+	public String toString() {
+		return "GamePlay [id=" + id + ", game=" + game + ", players=" + players + ", winner=" + winner + "]";
+	}
+	
+	
 	
 }

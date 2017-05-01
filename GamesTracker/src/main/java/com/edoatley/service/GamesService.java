@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.edoatley.model.Game;
+import com.edoatley.model.Player;
 import com.edoatley.repository.GamesRepository;
 
 @Service
@@ -57,5 +58,23 @@ public class GamesService {
 		}
 		
 		return isValidGame;
+	}
+
+	public void increaseTimesPlayed(int gameId, int timesPlayed) {
+		
+	}
+	
+	public Optional<Game> getGame(int gameId) {
+		Game game = repository.findOne(gameId);
+		return Optional.ofNullable(game);
+	}
+	
+	public void updateScore(int gameId, int playsToAdd) {
+		Optional<Game> gameO = getGame(gameId);
+		Game game = gameO.get();
+		int plays = game.getTimesPlayed();
+		plays += playsToAdd;
+		game.setTimesPlayed(plays);;
+		repository.save(game);
 	}
 }

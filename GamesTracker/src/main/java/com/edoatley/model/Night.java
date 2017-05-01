@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class Night {
 	private String description;
 	private boolean finished;
 		
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="GAMEPLAY_ID")
 	private List<GamePlay> gamesPlayed;
 	
@@ -36,18 +37,16 @@ public class Night {
 		gamesPlayed = new ArrayList<GamePlay>();
 	}
 
-	public Night(int id, String description, LocalDate date, boolean finished, List<GamePlay> gamesPlayed) {
+	public Night(String description, LocalDate date, boolean finished, List<GamePlay> gamesPlayed) {
 		super();
-		this.id = id;
 		this.description = description;
 		this.date = date;
 		this.finished = finished;
 		this.gamesPlayed = gamesPlayed;
 	}
 	
-	public Night(int id, String description, LocalDate date) {
+	public Night(String description, LocalDate date) {
 		super();
-		this.id = id;
 		this.description = description;
 		this.date = date;
 		this.finished = false;
@@ -104,6 +103,11 @@ public class Night {
 	public int getNumberOfGamesPlayed() {
 		return gamesPlayed.size();
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Night [id=" + id + ", date=" + date + ", description=" + description + ", finished=" + finished
+				+ ", gamesPlayed=" + gamesPlayed + "]";
+	}
 	
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.edoatley.model.GamePlay;
 import com.edoatley.model.Night;
 import com.edoatley.repository.NightsRepository;
 
@@ -55,5 +56,15 @@ public class NightsService {
 		}
 		
 		return isValidNight;
+	}
+
+	public Optional<Night> getNight(int nightId) {
+		Night night = repository.findOne(nightId);
+		return Optional.ofNullable(night);
+	}
+
+	public void addGamePlayToNight(Night night, GamePlay newGameplay) {
+		Optional<Night> latestViewOfNight = getNight(night.getId());
+		latestViewOfNight.get().getGamesPlayed().add(newGameplay);
 	}
 }
